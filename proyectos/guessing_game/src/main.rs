@@ -6,7 +6,7 @@ fn main() {
 
     let secret_number = rand::thread_rng().gen_range(1..=100);
 
-    println!("El número secreto es: {secret_number}");
+    // println!("El número secreto es: {secret_number}");
 
     loop {
         println!("Ingrese su suposición:");
@@ -17,7 +17,11 @@ fn main() {
             .read_line(&mut guess)
             .expect("Error al leer la línea");
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         println!("Su suposición es: {guess}");
 
